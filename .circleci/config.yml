@@ -36,7 +36,7 @@ jobs:
       - run:
           name: Install kubectl
           command: |
-            gcloud components install kubectl
+            sudo apt-get install kubectl
   smoke-test:
     docker:
       - image: alpine
