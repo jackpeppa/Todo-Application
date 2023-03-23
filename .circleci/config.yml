@@ -29,6 +29,14 @@ jobs:
       - run:
           name: Deploy to Kubernetes
           command: kubectl apply -f Deployment.yaml
+  install-kubectl:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+          name: Install kubectl
+          command: |
+            gcloud components install kubectl
   smoke-test:
     docker:
       - image: alpine
