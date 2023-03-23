@@ -29,6 +29,20 @@ jobs:
       - run:
           name: Deploy to Kubernetes
           command: kubectl apply -f Deployment.yaml
+  smoke-test:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - run:
+          name: Install kubectl
+          command: |
+            gcloud components install kubectl
+      - run:
+          name: Smoke Test
+          command: |
+            set -e
+            URL=$(kubectl get service todo-app -o=jsonpath='{.status.loadBalancer.ingress[0].ip}'):80
+            curl --fail $URL
 workflows:
   build-and-deploy:
     jobs:
@@ -36,3 +50,6 @@ workflows:
           context: my-context
       - deploy:
           context: my-context
+      - smoke-test:
+          context: my-context
+
