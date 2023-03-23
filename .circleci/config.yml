@@ -29,6 +29,11 @@ jobs:
       - run:
           name: Deploy to Kubernetes
           command: kubectl apply -f Deployment.yaml
+  smoke-test:
+    docker:
+      - image: google/cloud-sdk
+    steps:
+      - checkout
       - run:
           name: Smoke Test
           command: |
@@ -42,4 +47,7 @@ workflows:
           context: my-context
       - deploy:
           context: my-context
+      - smoke-test:
+          context: my-context
+
 
