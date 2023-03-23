@@ -31,12 +31,15 @@ jobs:
           command: kubectl apply -f Deployment.yaml
   install-kubectl:
     docker:
-      - image: google/cloud-sdk
+      - image: circleci/node:10.16.3
     steps:
       - run:
           name: Install kubectl
           command: |
-            sudo apt-get install kubectl
+            curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+            chmod +x ./kubectl
+            sudo mv ./kubectl /usr/local/bin/kubectl
+      - checkout
   smoke-test:
     docker:
       - image: alpine
