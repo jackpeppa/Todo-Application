@@ -36,5 +36,3 @@ workflows:
           context: my-context
       - deploy:
           context: my-context
-
-
