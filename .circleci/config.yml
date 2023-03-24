@@ -30,12 +30,10 @@ jobs:
           name: Deploy to Kubernetes
           command: kubectl apply -f Deployment.yaml
 workflows:
-  build:
+  build-and-deploy:
     jobs:
       - build:
           context: my-context
-  deploy:
-    jobs:
       - deploy:
           context: my-context
 
