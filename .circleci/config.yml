@@ -6,11 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Git and SSH
-          command: |
-            apt-get update && apt-get install -y git openssh-client
-      - setup_remote_docker
-      - run:
           name: Login to Docker Hub
           command: |
             echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
