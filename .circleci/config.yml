@@ -5,6 +5,10 @@ jobs:
       - image: docker:20.10.11
     steps:
       - checkout
+      - run:
+          name: Install Git and SSH
+          command: |
+            apt-get update && apt-get install -y git openssh-client
       - setup_remote_docker
       - run:
           name: Login to Docker Hub
