@@ -15,9 +15,11 @@ jobs:
           command: |
             docker build -t $DOCKERHUB_USERNAME/todo_app:latest .
             docker push $DOCKERHUB_USERNAME/todo_app:latest
+    continue-on-error: false
   deploy:
     docker:
       - image: google/cloud-sdk
+    needs: build
     steps:
       - checkout
       - run:
